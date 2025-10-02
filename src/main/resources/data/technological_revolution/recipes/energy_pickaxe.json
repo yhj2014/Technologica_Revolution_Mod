@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TTT",
+    "IRI",
+    "III"
+  ],
+  "key": {
+    "T": {
+      "item": "technological_revolution:titanium_ingot"
+    },
+    "I": {
+      "item": "technological_revolution:lithium_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    }
+  },
+  "result": {
+    "item": "technological_revolution:energy_pickaxe"
+  }
+}

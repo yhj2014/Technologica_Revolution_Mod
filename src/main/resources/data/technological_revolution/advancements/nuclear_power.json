@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "technological_revolution:uranium_ingot"
+    },
+    "title": {
+      "translate": "advancements.technological_revolution.nuclear_power.title"
+    },
+    "description": {
+      "translate": "advancements.technological_revolution.nuclear_power.description"
+    }
+  },
+  "parent": "technological_revolution:transmit_energy",
+  "criteria": {
+    "nuclear_power": {
+      "trigger": "technological_revolution:nuclear_power"
+    }
+  }
+}

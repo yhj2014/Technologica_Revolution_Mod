@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "technological_revolution:solar_panel"
+    },
+    "title": {
+      "translate": "advancements.technological_revolution.generate_power.title"
+    },
+    "description": {
+      "translate": "advancements.technological_revolution.generate_power.description"
+    }
+  },
+  "parent": "technological_revolution:root",
+  "criteria": {
+    "generate_power": {
+      "trigger": "technological_revolution:generate_power"
+    }
+  }
+}

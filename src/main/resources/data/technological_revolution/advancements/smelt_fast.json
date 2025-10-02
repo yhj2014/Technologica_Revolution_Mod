@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "technological_revolution:advanced_furnace"
+    },
+    "title": {
+      "translate": "advancements.technological_revolution.smelt_fast.title"
+    },
+    "description": {
+      "translate": "advancements.technological_revolution.smelt_fast.description"
+    }
+  },
+  "parent": "technological_revolution:crush_ore",
+  "criteria": {
+    "smelt_fast": {
+      "trigger": "technological_revolution:smelt_fast"
+    }
+  }
+}

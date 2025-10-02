@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "IRI",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "R": {
+      "item": "technological_revolution:uranium_ingot"
+    }
+  },
+  "result": {
+    "item": "technological_revolution:nuclear_reactor"
+  },
+  "conditions": [
+    {
+      "type": "technological_revolution:research_unlocked",
+      "research": "nuclear_technology"
+    }
+  ]
+}

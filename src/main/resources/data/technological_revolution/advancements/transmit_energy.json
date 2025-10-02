@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "technological_revolution:copper_wire"
+    },
+    "title": {
+      "translate": "advancements.technological_revolution.transmit_energy.title"
+    },
+    "description": {
+      "translate": "advancements.technological_revolution.transmit_energy.description"
+    }
+  },
+  "parent": "technological_revolution:generate_power",
+  "criteria": {
+    "transmit_energy": {
+      "trigger": "technological_revolution:transmit_energy"
+    }
+  }
+}

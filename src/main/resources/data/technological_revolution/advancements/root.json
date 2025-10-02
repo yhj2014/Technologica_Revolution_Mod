@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "item": "technological_revolution:solar_panel"
+    },
+    "title": {
+      "translate": "advancements.technological_revolution.root.title"
+    },
+    "description": {
+      "translate": "advancements.technological_revolution.root.description"
+    },
+    "background": "technological_revolution:textures/gui/advancements_background.png",
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "ore_gen": {
+    "uranium_ore": {
+      "enabled": true,
+      "count": 4,
+      "bottom_offset": 0,
+      "top_offset": 20,
+      "maximum": 64,
+      "biome_filter": []
+    },
+    "lithium_ore": {
+      "enabled": true,
+      "count": 6,
+      "bottom_offset": 0,
+      "top_offset": 40,
+      "maximum": 64,
+      "biome_filter": []
+    },
+    "titanium_ore": {
+      "enabled": true,
+      "count": 2,
+      "bottom_offset": 0,
+      "top_offset": 64,
+      "maximum": 128,
+      "biome_filter": []
+    }
+  }
+}

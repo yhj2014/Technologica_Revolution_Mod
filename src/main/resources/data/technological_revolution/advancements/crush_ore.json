@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "technological_revolution:ore_crusher"
+    },
+    "title": {
+      "translate": "advancements.technological_revolution.crush_ore.title"
+    },
+    "description": {
+      "translate": "advancements.technological_revolution.crush_ore.description"
+    }
+  },
+  "parent": "technological_revolution:generate_power",
+  "criteria": {
+    "crush_ore": {
+      "trigger": "technological_revolution:crush_ore"
+    }
+  }
+}

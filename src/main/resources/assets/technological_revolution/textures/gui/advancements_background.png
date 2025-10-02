@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<texture version="1.0">
+  <width>256</width>
+  <height>256</height>
+  <format>RGBA</format>
+  <data>
+    <!-- 这是一个占位符文件，实际的纹理文件应该是PNG格式 -->
+    <!-- 进度背景纹理 -->
+  </data>
+</texture>

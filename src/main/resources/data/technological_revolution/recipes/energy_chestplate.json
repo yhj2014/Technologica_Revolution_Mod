@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TIT",
+    "TTT",
+    "TTT"
+  ],
+  "key": {
+    "T": {
+      "item": "technological_revolution:titanium_ingot"
+    },
+    "I": {
+      "item": "technological_revolution:lithium_ingot"
+    }
+  },
+  "result": {
+    "item": "technological_revolution:energy_chestplate"
+  }
+}
