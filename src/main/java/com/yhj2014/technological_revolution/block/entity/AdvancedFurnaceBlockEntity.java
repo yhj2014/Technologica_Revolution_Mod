@@ -3,6 +3,7 @@ package com.yhj2014.technological_revolution.block.entity;
 import com.yhj2014.technological_revolution.TechnologicalRevolutionMod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -11,6 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.level.Level;
 import java.util.Optional;
 
@@ -48,7 +50,7 @@ public class AdvancedFurnaceBlockEntity extends AbstractMachineBlockEntity {
         
         // 查找熔炼配方
         Optional<SmeltingRecipe> recipe = level.getRecipeManager()
-            .getRecipeFor(RecipeType.SMELTING, new net.minecraft.world.item.crafting.SimpleContainer(input), level);
+            .getRecipeFor(RecipeType.SMELTING, new SimpleContainer(input), level);
             
         if (recipe.isPresent()) {
             ItemStack result = recipe.get().getResultItem(level.registryAccess()).copy();
@@ -69,8 +71,8 @@ public class AdvancedFurnaceBlockEntity extends AbstractMachineBlockEntity {
                 // 触发进度
                 if (level instanceof net.minecraft.server.level.ServerLevel) {
                     net.minecraft.world.entity.player.Player player = level.getNearestPlayer(worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), 10, false);
-                    if (player instanceof net.minecraft.server.level.ServerPlayer) {
-                        com.yhj2014.technological_revolution.advancement.ModAdvancements.SMELT_FAST.trigger((net.minecraft.server.level.ServerPlayer) player);
+                    if (player instanceof ServerPlayer) {
+                        com.yhj2014.technological_revolution.advancement.ModAdvancements.SMELT_FAST.trigger((ServerPlayer) player);
                     }
                 }
             }

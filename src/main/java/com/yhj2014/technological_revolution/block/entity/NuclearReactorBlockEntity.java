@@ -7,9 +7,11 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Explosion;
 
 import javax.annotation.Nullable;
 
@@ -23,32 +25,6 @@ public class NuclearReactorBlockEntity extends AbstractMachineBlockEntity {
 
     public NuclearReactorBlockEntity(BlockPos pos, BlockState state) {
         super(TechnologicalRevolutionMod.NUCLEAR_REACTOR_ENTITY.get(), pos, state, 100000); // 更大的能量存储
-        
-        // 更新容器数据访问器以包含热量信息
-        this.data = new net.minecraft.world.inventory.ContainerData() {
-            @Override
-            public int get(int index) {
-                switch (index) {
-                    case 0: return energyStorage.getEnergyStored();
-                    case 1: return energyStorage.getMaxEnergyStored();
-                    case 2: return getProgress();
-                    case 3: return getMaxProgress();
-                    case 4: return getHeat();
-                    case 5: return getMaxHeat();
-                    default: return 0;
-                }
-            }
-
-            @Override
-            public void set(int index, int value) {
-                // 不需要实现
-            }
-
-            @Override
-            public int getCount() {
-                return 6; // 能量存储、最大能量、进度、最大进度、热量、最大热量
-            }
-        };
     }
 
     @Override
@@ -120,7 +96,7 @@ public class NuclearReactorBlockEntity extends AbstractMachineBlockEntity {
             level.removeBlock(worldPosition, false);
             
             // 创建爆炸
-            level.explode(null, worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), 4.0F, net.minecraft.world.level.Explosion.BlockInteraction.DESTROY);
+            level.explode(null, worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), 4.0F, Level.ExplosionInteraction.BLOCK);
         }
     }
 

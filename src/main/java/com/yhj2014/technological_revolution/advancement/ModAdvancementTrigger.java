@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.PlayerAdvancements;
 import net.minecraft.server.level.ServerPlayer;
 
-public class ModAdvancementTrigger extends SimpleCriterionTrigger<ModAdvancementTrigger.Instance> {
+public class ModAdvancementTrigger extends SimpleCriterionTrigger<ModAdvancementTrigger.TriggerInstance> {
     private final ResourceLocation id;
 
     public ModAdvancementTrigger(ResourceLocation id) {
@@ -22,19 +22,24 @@ public class ModAdvancementTrigger extends SimpleCriterionTrigger<ModAdvancement
         return id;
     }
 
-    @Override
-    public Instance createInstance(JsonObject json, ContextAwarePredicate predicate, DeserializationContext context) {
-        return new Instance(id, predicate);
-    }
-
     public void trigger(ServerPlayer player) {
-        PlayerAdvancements advancements = player.getAdvancements();
-        trigger(advancements, (instance) -> true);
+        this.trigger(player, (instance) -> {
+            return instance.test(player);
+        });
     }
 
-    public static class Instance extends AbstractCriterionTriggerInstance {
-        public Instance(ResourceLocation id, ContextAwarePredicate predicate) {
+    @Override
+    protected TriggerInstance createInstance(JsonObject json, ContextAwarePredicate predicate, DeserializationContext context) {
+        return new TriggerInstance(id, predicate);
+    }
+
+    public static class TriggerInstance extends AbstractCriterionTriggerInstance {
+        public TriggerInstance(ResourceLocation id, ContextAwarePredicate predicate) {
             super(id, predicate);
+        }
+        
+        public boolean test(ServerPlayer player) {
+            return true;
         }
     }
 }

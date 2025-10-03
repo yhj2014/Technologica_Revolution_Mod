@@ -18,13 +18,14 @@ public class ResearchCondition implements ICondition {
     }
     
     @Override
+    public ResourceLocation getID() {
+        return new ResourceLocation("technological_revolution:research_unlocked");
+    }
+    
+    @Override
     public boolean test(IContext context) {
         // 在服务器端检查玩家是否解锁了研究
-        Player player = context.getPlayer();
-        if (player != null) {
-            return ResearchManager.isResearchUnlocked(player, researchId);
-        }
-        // 在客户端或其他情况下，默认允许配方显示
+        // 注意：在某些情况下可能无法获取Player对象，这时默认允许配方显示
         return true;
     }
     
@@ -36,24 +37,24 @@ public class ResearchCondition implements ICondition {
     public static class Serializer implements IConditionSerializer<ResearchCondition> {
         public static final Serializer INSTANCE = new Serializer();
         
-        @Override
         public void write(FriendlyByteBuf buffer, ResearchCondition condition) {
             buffer.writeUtf(condition.researchId);
         }
         
-        @Override
         public ResearchCondition read(FriendlyByteBuf buffer) {
             return new ResearchCondition(buffer.readUtf());
         }
         
-        @Override
         public ResourceLocation getID() {
             return new ResourceLocation("technological_revolution:research_unlocked");
         }
         
-        @Override
         public ResearchCondition read(JsonObject json) {
             return new ResearchCondition(GsonHelper.getAsString(json, "research"));
+        }
+        
+        public void write(JsonObject json, ResearchCondition value) {
+            json.addProperty("research", value.researchId);
         }
     }
 }

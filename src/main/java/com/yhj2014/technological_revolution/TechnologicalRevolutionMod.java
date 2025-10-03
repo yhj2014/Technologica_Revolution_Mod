@@ -24,6 +24,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.network.IContainerFactory;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -63,39 +64,6 @@ public class TechnologicalRevolutionMod
             .icon(() -> EXAMPLE_ITEM.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
                 output.accept(EXAMPLE_ITEM.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
-                
-                // Generators
-                output.accept(SOLAR_PANEL_ITEM.get());
-                output.accept(WIND_TURBINE_ITEM.get());
-                output.accept(WATER_TURBINE_ITEM.get());
-                output.accept(NUCLEAR_REACTOR_ITEM.get());
-                
-                // Machines
-                output.accept(ORE_CRUSHER_ITEM.get());
-                output.accept(ADVANCED_FURNACE_ITEM.get());
-                
-                // Wires
-                output.accept(COPPER_WIRE_ITEM.get());
-                output.accept(GOLD_WIRE_ITEM.get());
-                
-                // Ores
-                output.accept(URANIUM_ORE_ITEM.get());
-                output.accept(LITHIUM_ORE_ITEM.get());
-                output.accept(TITANIUM_ORE_ITEM.get());
-                
-                // Ingots
-                output.accept(URANIUM_INGOT.get());
-                output.accept(LITHIUM_INGOT.get());
-                output.accept(TITANIUM_INGOT.get());
-                
-                // Energy Tools
-                output.accept(ENERGY_PICKAXE.get());
-                
-                // Energy Armor
-                output.accept(ENERGY_HELMET.get());
-                output.accept(ENERGY_CHESTPLATE.get());
-                output.accept(ENERGY_LEGGINGS.get());
-                output.accept(ENERGY_BOOTS.get());
             }).build());
 
     // Technological Revolution Blocks
@@ -192,30 +160,46 @@ public class TechnologicalRevolutionMod
         
     // Energy Armor
     public static final RegistryObject<Item> ENERGY_HELMET = ITEMS.register("energy_helmet", 
-        () -> new com.yhj2014.technological_revolution.item.EnergyArmorItem(50000, 50, com.yhj2014.technological_revolution.item.ModArmorMaterials.ENERGY, net.minecraft.world.entity.EquipmentSlot.HEAD, new Item.Properties()));
+        () -> new com.yhj2014.technological_revolution.item.EnergyArmorItem(50000, 50, com.yhj2014.technological_revolution.item.ModArmorMaterials.ENERGY, net.minecraft.world.item.ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> ENERGY_CHESTPLATE = ITEMS.register("energy_chestplate", 
-        () -> new com.yhj2014.technological_revolution.item.EnergyArmorItem(100000, 50, com.yhj2014.technological_revolution.item.ModArmorMaterials.ENERGY, net.minecraft.world.entity.EquipmentSlot.CHEST, new Item.Properties()));
+        () -> new com.yhj2014.technological_revolution.item.EnergyArmorItem(100000, 50, com.yhj2014.technological_revolution.item.ModArmorMaterials.ENERGY, net.minecraft.world.item.ArmorItem.Type.CHESTPLATE, new Item.Properties()));
     public static final RegistryObject<Item> ENERGY_LEGGINGS = ITEMS.register("energy_leggings", 
-        () -> new com.yhj2014.technological_revolution.item.EnergyArmorItem(75000, 50, com.yhj2014.technological_revolution.item.ModArmorMaterials.ENERGY, net.minecraft.world.entity.EquipmentSlot.LEGS, new Item.Properties()));
+        () -> new com.yhj2014.technological_revolution.item.EnergyArmorItem(75000, 50, com.yhj2014.technological_revolution.item.ModArmorMaterials.ENERGY, net.minecraft.world.item.ArmorItem.Type.LEGGINGS, new Item.Properties()));
     public static final RegistryObject<Item> ENERGY_BOOTS = ITEMS.register("energy_boots", 
-        () -> new com.yhj2014.technological_revolution.item.EnergyArmorItem(50000, 50, com.yhj2014.technological_revolution.item.ModArmorMaterials.ENERGY, net.minecraft.world.entity.EquipmentSlot.FEET, new Item.Properties()));
+        () -> new com.yhj2014.technological_revolution.item.EnergyArmorItem(50000, 50, com.yhj2014.technological_revolution.item.ModArmorMaterials.ENERGY, net.minecraft.world.item.ArmorItem.Type.BOOTS, new Item.Properties()));
 
     // Containers
-    public static final RegistryObject<net.minecraft.world.inventory.MenuType<?>> SOLAR_PANEL_CONTAINER = MENUS.register("solar_panel_container",
-        () -> new net.minecraft.world.inventory.MenuType<>((id, playerInventory) -> 
-            new com.yhj2014.technological_revolution.container.SolarPanelContainer(id, playerInventory)));
+    public static final RegistryObject<net.minecraft.world.inventory.MenuType<com.yhj2014.technological_revolution.container.SolarPanelContainer>> SOLAR_PANEL_CONTAINER = MENUS.register("solar_panel_container",
+        () -> new net.minecraft.world.inventory.MenuType<>(new IContainerFactory<com.yhj2014.technological_revolution.container.SolarPanelContainer>() {
+            @Override
+            public com.yhj2014.technological_revolution.container.SolarPanelContainer create(int id, net.minecraft.world.entity.player.Inventory playerInventory, net.minecraft.network.FriendlyByteBuf data) {
+                return new com.yhj2014.technological_revolution.container.SolarPanelContainer(id, playerInventory);
+            }
+        }, net.minecraft.world.flag.FeatureFlags.VANILLA_SET));
             
-    public static final RegistryObject<net.minecraft.world.inventory.MenuType<?>> ORE_CRUSHER_CONTAINER = MENUS.register("ore_crusher_container",
-        () -> new net.minecraft.world.inventory.MenuType<>((id, playerInventory) -> 
-            new com.yhj2014.technological_revolution.container.OreCrusherContainer(id, playerInventory)));
+    public static final RegistryObject<net.minecraft.world.inventory.MenuType<com.yhj2014.technological_revolution.container.OreCrusherContainer>> ORE_CRUSHER_CONTAINER = MENUS.register("ore_crusher_container",
+        () -> new net.minecraft.world.inventory.MenuType<>(new IContainerFactory<com.yhj2014.technological_revolution.container.OreCrusherContainer>() {
+            @Override
+            public com.yhj2014.technological_revolution.container.OreCrusherContainer create(int id, net.minecraft.world.entity.player.Inventory playerInventory, net.minecraft.network.FriendlyByteBuf data) {
+                return new com.yhj2014.technological_revolution.container.OreCrusherContainer(id, playerInventory);
+            }
+        }, net.minecraft.world.flag.FeatureFlags.VANILLA_SET));
             
-    public static final RegistryObject<net.minecraft.world.inventory.MenuType<?>> ADVANCED_FURNACE_CONTAINER = MENUS.register("advanced_furnace_container",
-        () -> new net.minecraft.world.inventory.MenuType<>((id, playerInventory) -> 
-            new com.yhj2014.technological_revolution.container.AdvancedFurnaceContainer(id, playerInventory)));
+    public static final RegistryObject<net.minecraft.world.inventory.MenuType<com.yhj2014.technological_revolution.container.AdvancedFurnaceContainer>> ADVANCED_FURNACE_CONTAINER = MENUS.register("advanced_furnace_container",
+        () -> new net.minecraft.world.inventory.MenuType<>(new IContainerFactory<com.yhj2014.technological_revolution.container.AdvancedFurnaceContainer>() {
+            @Override
+            public com.yhj2014.technological_revolution.container.AdvancedFurnaceContainer create(int id, net.minecraft.world.entity.player.Inventory playerInventory, net.minecraft.network.FriendlyByteBuf data) {
+                return new com.yhj2014.technological_revolution.container.AdvancedFurnaceContainer(id, playerInventory);
+            }
+        }, net.minecraft.world.flag.FeatureFlags.VANILLA_SET));
             
-    public static final RegistryObject<net.minecraft.world.inventory.MenuType<?>> NUCLEAR_REACTOR_CONTAINER = MENUS.register("nuclear_reactor_container",
-        () -> new net.minecraft.world.inventory.MenuType<>((id, playerInventory) -> 
-            new com.yhj2014.technological_revolution.container.NuclearReactorContainer(id, playerInventory)));
+    public static final RegistryObject<net.minecraft.world.inventory.MenuType<com.yhj2014.technological_revolution.container.NuclearReactorContainer>> NUCLEAR_REACTOR_CONTAINER = MENUS.register("nuclear_reactor_container",
+        () -> new net.minecraft.world.inventory.MenuType<>(new IContainerFactory<com.yhj2014.technological_revolution.container.NuclearReactorContainer>() {
+            @Override
+            public com.yhj2014.technological_revolution.container.NuclearReactorContainer create(int id, net.minecraft.world.entity.player.Inventory playerInventory, net.minecraft.network.FriendlyByteBuf data) {
+                return new com.yhj2014.technological_revolution.container.NuclearReactorContainer(id, playerInventory);
+            }
+        }, net.minecraft.world.flag.FeatureFlags.VANILLA_SET));
 
     // Block Entities
     public static final RegistryObject<BlockEntityType<?>> SOLAR_PANEL_ENTITY = BLOCK_ENTITIES.register("solar_panel_entity",
@@ -339,10 +323,8 @@ public class TechnologicalRevolutionMod
     public static class ModWorldEvents {
         @SubscribeEvent
         public static void onBootstrapConfigured(net.minecraftforge.eventbus.api.SubscribeEvent event) {
-            if (event instanceof net.minecraftforge.event.lifecycle.RegistryEvent.Register) {
-                // 注册世界生成
-                // 这里将在后续版本中实现
-            }
+            // 注册世界生成
+            // 这里将在后续版本中实现
         }
     }
 }

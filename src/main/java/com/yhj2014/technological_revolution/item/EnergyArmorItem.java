@@ -6,7 +6,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.energy.EnergyStorage;
 
 import javax.annotation.Nullable;
@@ -33,8 +33,8 @@ public class EnergyArmorItem extends ArmorItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable net.minecraft.world.level.Level level, List<Component> tooltip, net.minecraft.client.gui.screens.Screen.TooltipFlag flag) {
-        stack.getCapability(CapabilityEnergy.ENERGY).ifPresent(energyStorage -> {
+    public void appendHoverText(ItemStack stack, @Nullable net.minecraft.world.level.Level level, List<Component> tooltip, net.minecraft.world.item.TooltipFlag flag) {
+        stack.getCapability(ForgeCapabilities.ENERGY).ifPresent(energyStorage -> {
             tooltip.add(Component.literal("Energy: " + energyStorage.getEnergyStored() + "/" + energyStorage.getMaxEnergyStored() + " FE"));
         });
         super.appendHoverText(stack, level, tooltip, flag);
@@ -49,7 +49,7 @@ public class EnergyArmorItem extends ArmorItem {
             @Nullable
             @Override
             public <T> net.minecraftforge.common.util.LazyOptional<T> getCapability(net.minecraftforge.common.capabilities.Capability<T> cap, @Nullable net.minecraft.core.Direction side) {
-                if (cap == CapabilityEnergy.ENERGY) {
+                if (cap == ForgeCapabilities.ENERGY) {
                     return net.minecraftforge.common.util.LazyOptional.of(() -> energyStorage).cast();
                 }
                 return net.minecraftforge.common.util.LazyOptional.empty();

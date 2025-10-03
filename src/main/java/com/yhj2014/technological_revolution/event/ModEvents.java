@@ -2,7 +2,7 @@ package com.yhj2014.technological_revolution.event;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -25,7 +25,8 @@ public class ModEvents {
             for (ItemStack stack : player.getArmorSlots()) {
                 if (stack.getItem() instanceof EnergyArmorItem energyArmor) {
                     // 检查护甲是否有足够的能量
-                    stack.getCapability(CapabilityEnergy.ENERGY).ifPresent(energyStorage -> {
+                    IEnergyStorage energyStorage = stack.getCapability(ForgeCapabilities.ENERGY).orElse(null);
+                    if (energyStorage != null) {
                         int energyPerDamage = energyArmor.getEnergyPerDamage();
                         int energyNeeded = (int) (remainingDamage * energyPerDamage);
                         
@@ -35,7 +36,7 @@ public class ModEvents {
                         
                         // 更新剩余伤害
                         remainingDamage -= damageAbsorbed;
-                    });
+                    }
                 }
             }
             

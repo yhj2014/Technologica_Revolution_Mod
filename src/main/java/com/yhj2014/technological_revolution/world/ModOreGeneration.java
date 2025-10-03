@@ -66,7 +66,7 @@ public class ModOreGeneration {
     }
     
     private static List<PlacementModifier> commonOrePlacement(int count, PlacementModifier height) {
-        return List.of(CountPlacement.of(count), InSquarePlacement.spread(), height, BiomeFilter.placement());
+        return List.of(CountPlacement.of(count), InSquarePlacement.spread(), height, BiomeFilter.biome());
     }
     
     private static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {
