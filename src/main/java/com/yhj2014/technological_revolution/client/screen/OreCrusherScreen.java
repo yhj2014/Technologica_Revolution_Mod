@@ -2,16 +2,12 @@ package com.yhj2014.technological_revolution.client.screen;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import com.yhj2014.technological_revolution.TechnologicalRevolutionMod;
 import com.yhj2014.technological_revolution.container.OreCrusherContainer;
 
 public class OreCrusherScreen extends AbstractMachineScreen<OreCrusherContainer> {
-    private static final ResourceLocation GUI_TEXTURE = new ResourceLocation(TechnologicalRevolutionMod.MODID, "textures/gui/ore_crusher.png");
-
     public OreCrusherScreen(OreCrusherContainer menu, Inventory playerInventory, Component title) {
-        super(menu, playerInventory, title, GUI_TEXTURE);
+        super(menu, playerInventory, title);
         this.imageWidth = 176;
         this.imageHeight = 166;
     }

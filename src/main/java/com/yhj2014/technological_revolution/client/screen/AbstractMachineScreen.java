@@ -5,25 +5,30 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public abstract class AbstractMachineScreen<T extends net.minecraft.world.inventory.AbstractContainerMenu> extends AbstractContainerScreen<T> {
-    protected final ResourceLocation GUI_TEXTURE;
-
-    public AbstractMachineScreen(T menu, Inventory playerInventory, Component title, ResourceLocation guiTexture) {
+    public AbstractMachineScreen(T menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
-        this.GUI_TEXTURE = guiTexture;
     }
 
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, GUI_TEXTURE);
+        // 渲染背景
+        renderBackground(guiGraphics);
+        
+        // 渲染机器GUI背景（使用纯色）
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        guiGraphics.blit(GUI_TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
+        
+        // 绘制背景框（深灰色）
+        guiGraphics.fill(x, y, x + imageWidth, y + imageHeight, 0xFF404040);
+        
+        // 绘制标题栏（稍浅的灰色）
+        guiGraphics.fill(x, y, x + imageWidth, y + 15, 0xFF606060);
+        
+        // 绘制玩家物品栏区域（稍浅的灰色）
+        guiGraphics.fill(x + 7, y + 70, x + imageWidth - 7, y + imageHeight - 7, 0xFF505050);
     }
 
     @Override

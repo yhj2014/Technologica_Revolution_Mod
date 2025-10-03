@@ -59,12 +59,10 @@ public class TechnologicalRevolutionMod
             .alwaysEat().nutrition(1).saturationMod(2f).build())));
 
     // Creates a creative tab with the id "technological_revolution:example_tab" for the example item, that is placed after the combat tab
-    public static final RegistryObject<CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
+    public static final RegistryObject<CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("technological_revolution_tab", () -> CreativeModeTab.builder()
             .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon(() -> EXAMPLE_ITEM.get().getDefaultInstance())
-            .displayItems((parameters, output) -> {
-                output.accept(EXAMPLE_ITEM.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
-            }).build());
+            .build());
 
     // Technological Revolution Blocks
     // Energy Generators
@@ -288,6 +286,32 @@ public class TechnologicalRevolutionMod
     {
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS)
             event.accept(EXAMPLE_BLOCK_ITEM);
+            
+        // 添加所有方块和物品到科技革命标签页
+        if (event.getTab() == EXAMPLE_TAB.get()) {
+            // 添加所有方块
+            event.accept(SOLAR_PANEL_ITEM.get());
+            event.accept(WIND_TURBINE_ITEM.get());
+            event.accept(WATER_TURBINE_ITEM.get());
+            event.accept(NUCLEAR_REACTOR_ITEM.get());
+            event.accept(ORE_CRUSHER_ITEM.get());
+            event.accept(ADVANCED_FURNACE_ITEM.get());
+            event.accept(COPPER_WIRE_ITEM.get());
+            event.accept(GOLD_WIRE_ITEM.get());
+            event.accept(URANIUM_ORE_ITEM.get());
+            event.accept(LITHIUM_ORE_ITEM.get());
+            event.accept(TITANIUM_ORE_ITEM.get());
+            
+            // 添加所有物品
+            event.accept(URANIUM_INGOT.get());
+            event.accept(LITHIUM_INGOT.get());
+            event.accept(TITANIUM_INGOT.get());
+            event.accept(ENERGY_PICKAXE.get());
+            event.accept(ENERGY_HELMET.get());
+            event.accept(ENERGY_CHESTPLATE.get());
+            event.accept(ENERGY_LEGGINGS.get());
+            event.accept(ENERGY_BOOTS.get());
+        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
@@ -316,6 +340,27 @@ public class TechnologicalRevolutionMod
                 net.minecraft.client.gui.screens.MenuScreens.register(ADVANCED_FURNACE_CONTAINER.get(), com.yhj2014.technological_revolution.client.screen.AdvancedFurnaceScreen::new);
                 net.minecraft.client.gui.screens.MenuScreens.register(NUCLEAR_REACTOR_CONTAINER.get(), com.yhj2014.technological_revolution.client.screen.NuclearReactorScreen::new);
             });
+        }
+        
+        @SubscribeEvent
+        public static void registerBlockColors(net.minecraftforge.client.event.RegisterColorHandlersEvent.Block event) {
+            // 注册方块颜色处理器
+            event.register(new com.yhj2014.technological_revolution.client.render.ModBlockColor(), 
+                SOLAR_PANEL.get(), WIND_TURBINE.get(), WATER_TURBINE.get(), NUCLEAR_REACTOR.get(),
+                ORE_CRUSHER.get(), ADVANCED_FURNACE.get(), COPPER_WIRE.get(), GOLD_WIRE.get(),
+                URANIUM_ORE.get(), LITHIUM_ORE.get(), TITANIUM_ORE.get());
+        }
+        
+        @SubscribeEvent
+        public static void registerItemColors(net.minecraftforge.client.event.RegisterColorHandlersEvent.Item event) {
+            // 注册物品颜色处理器
+            event.register(new com.yhj2014.technological_revolution.client.render.ModItemColor(),
+                SOLAR_PANEL_ITEM.get(), WIND_TURBINE_ITEM.get(), WATER_TURBINE_ITEM.get(), NUCLEAR_REACTOR_ITEM.get(),
+                ORE_CRUSHER_ITEM.get(), ADVANCED_FURNACE_ITEM.get(), COPPER_WIRE_ITEM.get(), GOLD_WIRE_ITEM.get(),
+                URANIUM_ORE_ITEM.get(), LITHIUM_ORE_ITEM.get(), TITANIUM_ORE_ITEM.get(),
+                URANIUM_INGOT.get(), LITHIUM_INGOT.get(), TITANIUM_INGOT.get(),
+                ENERGY_PICKAXE.get(), ENERGY_HELMET.get(), ENERGY_CHESTPLATE.get(), 
+                ENERGY_LEGGINGS.get(), ENERGY_BOOTS.get());
         }
     }
     

@@ -2,16 +2,12 @@ package com.yhj2014.technological_revolution.client.screen;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import com.yhj2014.technological_revolution.TechnologicalRevolutionMod;
 import com.yhj2014.technological_revolution.container.AdvancedFurnaceContainer;
 
 public class AdvancedFurnaceScreen extends AbstractMachineScreen<AdvancedFurnaceContainer> {
-    private static final ResourceLocation GUI_TEXTURE = new ResourceLocation(TechnologicalRevolutionMod.MODID, "textures/gui/advanced_furnace.png");
-
     public AdvancedFurnaceScreen(AdvancedFurnaceContainer menu, Inventory playerInventory, Component title) {
-        super(menu, playerInventory, title, GUI_TEXTURE);
+        super(menu, playerInventory, title);
         this.imageWidth = 176;
         this.imageHeight = 166;
     }
@@ -38,12 +34,5 @@ public class AdvancedFurnaceScreen extends AbstractMachineScreen<AdvancedFurnace
         
         // 渲染进度条
         renderProgressBar(guiGraphics, leftPos + 79, topPos + 35, menu.getProgress(), menu.getMaxProgress());
-        
-        // 如果是核反应堆，渲染热量条
-        // 通过标题判断是否为核反应堆
-        if (this.title.getString().equals("Nuclear Reactor")) {
-            // 渲染热量条（假设容器中添加了热量数据访问方法）
-            // 这里需要在容器中添加热量数据访问
-        }
     }
 }
