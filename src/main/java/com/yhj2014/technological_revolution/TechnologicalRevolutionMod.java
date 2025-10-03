@@ -322,7 +322,7 @@ public class TechnologicalRevolutionMod
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class ModWorldEvents {
         @SubscribeEvent
-        public static void onBootstrapConfigured(net.minecraftforge.eventbus.api.SubscribeEvent event) {
+        public static void onBootstrapConfigured(net.minecraftforge.registries.RegisterEvent event) {
             // 注册世界生成
             // 这里将在后续版本中实现
         }
