@@ -1,6 +1,4 @@
-# Technological Revolution Mod
-
-![Mod Logo](link-to-logo-if-available)
+# Technological Revolution
 
 这是一个为 Minecraft 1.20.1 设计的 Forge 模组，名为 "Technological Revolution"。该模组旨在为游戏添加科技元素，包括新的能源生成方式（太阳能、风能、水能、核能）、机器（矿石粉碎机、高级熔炉）、能源传输系统（导线）、新的矿石（铀、锂、钛）以及相关的工具和盔甲。
 
@@ -125,4 +123,4 @@ Technological-Revolution/
 
 ## 许可证
 
-本项目采用 [许可证名称] 许可证 - 请查看 [LICENSE](LICENSE) 文件了解详细信息。
+本项目采用 [LGPL 2.1] 许可证 - 请查看 [LICENSE](LICENSE) 文件了解详细信息。
